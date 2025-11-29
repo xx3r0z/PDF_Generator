@@ -1,0 +1,25 @@
+from fpdf import FPDF
+import pandas as pd
+
+
+pdf = FPDF(orientation="P", unit="mm", format="A4")
+
+# the df variable contains an object data frame
+df = pd.read_csv("topics.csv")
+
+for index, row in df.iterrows():
+    pdf.add_page()
+    pdf.set_font(family="Times", style="B", size=24)
+    # Set text color in (R,G,B)
+    pdf.set_text_color(100,100,100)
+    # to access the topics in each row
+    topic = row["Topic"]
+    # w-width (set to zero means it will cover the whole width. H: Height, align: Align text to the left, Border: Set border,
+    # ln: to make the next cell start in a new line
+    pdf.cell(w=0, h=24, txt=f"{topic}", align="L", ln=1, border=1)
+    # pdf line is to draw a line in the pdf page, x1&x2 is the distance from the left hand edge of the page y1&y2 is
+    # the distance from the top all measurement in mm as stated in the unit from above
+    pdf.line(10, 21, 200, 21)
+
+
+pdf.output("output.pdf")
