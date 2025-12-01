@@ -19,7 +19,11 @@ for index, row in df.iterrows():
     pdf.cell(w=0, h=24, txt=f"{topic}", align="L", ln=1, border=1)
     # pdf line is to draw a line in the pdf page, x1&x2 is the distance from the left hand edge of the page y1&y2 is
     # the distance from the top all measurement in mm as stated in the unit from above
-    pdf.line(10, 21, 200, 21)
+    pdf.line(10, 40, 200, 40)
+    # range(5) creates a list [0,1,2,3,4], but you have to cover it in list() to view the list
+    # print(list(range(row["Pages"])))
+    for i in range(row["Pages"] - 1):
+        pdf.add_page()
 
 
 pdf.output("output.pdf")
